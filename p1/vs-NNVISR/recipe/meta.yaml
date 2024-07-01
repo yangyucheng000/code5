@@ -1,0 +1,46 @@
+{% set name = "VapourSynth-NNVISR" %}
+{% set version = "1.0.0a6" %}
+{% set build = 2 %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - path: ../
+
+build:
+  number: {{ build }}
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ stdlib("c") }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('cuda') }}
+    - cuda-version  >=12
+    - cmake
+    - ninja
+  host:
+    - cuda-version  >=12
+    - cuda-cudart-dev
+    - libcublas-dev
+    - libnvinfer-dev {{ tensorrt_version }}
+    - vapoursynth  >=67
+  run:
+    - vapoursynth  >=67
+
+about:
+  home: https://github.com/tongyuantongyu/vs-NNVISR
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: ../LICENSE.txt
+  summary: NNVISR VapourSynth Plugin
+  description: |
+    The Neural Network Video Interpolation / Super Resolution Filter of VapourSynth.
+  dev_url: https://github.com/tongyuantongyu/vs-NNVISR
+  doc_url: https://github.com/tongyuantongyu/vs-NNVISR/blob/main/tensorrt/README.md
+
+extra:
+  recipe-maintainers:
+    - tongyuantongyu
